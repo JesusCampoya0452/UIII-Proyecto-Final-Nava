@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Estudiante{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h3>Agregar Nuevo Estudiante</h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="mt-3">
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+                <a href="{% url 'ver_estudiantes' %}" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

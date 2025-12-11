@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Cursos{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Cursos</h2>
+    <a href="{% url 'agregar_curso' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo Curso</a>
+</div>
+<table class="table table-bordered responsive">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre del Curso</th>
+            <th>Descripción</th>
+            <th>Créditos</th>
+            <th>Profesor</th>
+            <th>Horario</th>
+            <th>Aula</th>
+            <th>Nivel Educativo</th>
+            <th>Costo</th>
+            <th class="text-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for curso in cursos %}
+        <tr>
+            <td>{{ curso.id_curso }}</td>
+            <td>{{ curso.nombre_curso }}</td>
+            <td>{{ curso.descripcion }}</td>
+            <td>{{ curso.creditos }}</td>
+            <td>{{ curso.profesor }}</td>
+            <td>{{ curso.horario }}</td>
+            <td>{{ curso.aula }}</td>
+            <td>{{ curso.nivel_educativo }}</td>
+            <td>{{ curso.costo_curso }}</td>
+            <td class="text-center">
+                <a href="{% url 'actualizar_curso' pk=curso.id_curso %}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
+                <a href="{% url 'eliminar_curso' pk=curso.id_curso %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar curso?');"><i class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Asistencias{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+    <h2>Registro de Asistencias</h2>
+    <a href="{% url 'agregar_asistencia' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Registrar Asistencia</a>
+</div>
+<table class="table responsive">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Estudiante</th>
+            <th>Curso</th>
+            <th>Fecha</th>
+            <th>Presente</th>
+            <th>Justificación</th>
+            <th>Comentarios</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for asistencia in asistencias %}
+        <tr>
+            <td>{{ asistencia.id_asistencia }}</td>
+            <td>{{ asistencia.estudiante }}</td>
+            <td>{{ asistencia.curso }}</td>
+            <td>{{ asistencia.fecha_clase }}</td>
+            <td>{{ asistencia.presente|yesno:"Sí,No" }}</td>
+            <td>{{ asistencia.justificacion }}</td>
+            <td>{{ asistencia.comentarios }}</td>
+            <td>
+                <a href="{% url 'actualizar_asistencia' pk=asistencia.id_asistencia %}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
+                <a href="{% url 'eliminar_asistencia' pk=asistencia.id_asistencia %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar registro?');"><i class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

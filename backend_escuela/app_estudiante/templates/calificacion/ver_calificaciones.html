@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Calificaciones{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3">
+    <h2>Calificaciones</h2>
+    <a href="{% url 'agregar_calificacion' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Nueva Calificación</a>
+</div>
+<table class="table table-hover responsive">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Inscripción</th>
+            <th>Tipo Evaluación</th>
+            <th>Fecha Evaluación</th>
+            <th>Puntaje</th>
+            <th>Ponderación</th>
+            <th>Comentarios</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for calificacion in calificaciones %}
+        <tr>
+            <td>{{ calificacion.id_calificacion }}</td>
+            <td>{{ calificacion.inscripcion }}</td>
+            <td>{{ calificacion.tipo_evaluacion }}</td>
+            <td>{{ calificacion.fecha_evaluacion }}</td>
+            <td>{{ calificacion.puntaje }}</td>
+            <td>{{ calificacion.ponderacion }}</td>
+            <td>{{ calificacion.comentarios }}</td>
+            <td>
+                <a href="{% url 'actualizar_calificacion' pk=calificacion.id_calificacion %}" class="btn btn-warning btn-sm"><i class="fas fa-pen"></i></a>
+                <a href="{% url 'eliminar_calificacion' pk=calificacion.id_calificacion %}" class="btn btn-danger btn-sm" onclick="return confirm('¿Borrar calificación?');"><i class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
